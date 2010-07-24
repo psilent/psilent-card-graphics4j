@@ -31,8 +31,25 @@ import net.psilent.cardgraphics.CardTypes.Facing;
 import net.psilent.cardgraphics.CardTypes.Rank;
 import net.psilent.cardgraphics.CardTypes.Suit;
 
+/**
+ * A playing card graphic derived from a JLabel which can be placed on a form at design-time and
+ * is the main class of this package.
+ * <p>
+ * The card can display either a FRONT or BACK {@link net.psilent.cardgraphics.CardTypes.Facing  Facing},
+ * a {@link net.psilent.cardgraphics.CardTypes.Rank  Rank} (ACE, ONE, TWO, etc.) and a standard
+ * {@link net.psilent.cardgraphics.CardTypes.Suit  Suit}.
+ * <p>
+ * When clicked, the card is highlighted and the word "HELD" is displayed over it. Clicking again
+ * clears it. Toggling held-mode by clicking can be enabled or disabled by calling {@link net.psilent.cardgraphics.CardGraphic#setClickable setClickable}(false).
+ *
+ * @author Arnold B. Spence
+ */
 public class CardGraphic extends JLabel
 {
+    /**
+     * Loads card image graphics, initializes the size of the widget to match the images and
+     * enables mouse and hierarchy events.
+     */
     public CardGraphic()
     {
         // Cause processxxxEvent to be called for the following event types
@@ -45,6 +62,10 @@ public class CardGraphic extends JLabel
         setPreferredSize(new Dimension(cardFaces[0][0].getIconWidth(), cardFaces[0][0].getIconHeight()));
     }
 
+    /**
+     * Toggle the held-mode highlighting.
+     * @param a_held    When set to true, the card is highlighted and overlaid with the word "HELD".
+     */
     public void setHeld(boolean a_held)
     {
         held = a_held;
@@ -61,6 +82,10 @@ public class CardGraphic extends JLabel
         this.clickable = clickable;
     }
 
+    /**
+     * The hierarchy event is used in order to know when the widget has a valid graphics context
+     * and it is the earliest point we can make calculations for for the "held" mode graphics.
+     */
     @Override
     protected void processHierarchyEvent(HierarchyEvent e)
     {        

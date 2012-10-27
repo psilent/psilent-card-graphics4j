@@ -63,7 +63,7 @@ public class CardGraphic extends JLabel
     }
 
     /**
-     * Toggle the held-mode highlighting.
+     * Sets whether or not the card displays the held-mode highlighting.
      * @param a_held    When set to true, the card is highlighted and overlaid with the word "HELD".
      */
     public void setHeld(boolean a_held)
@@ -72,11 +72,19 @@ public class CardGraphic extends JLabel
         repaint();
     }
 
+    /**
+     * Returns true if held-mode highlighting is on.
+     * @return true if held-mode highlighting is on.
+     */
     public boolean isHeld()
     {
         return held;
     }
 
+    /**
+     * Sets whether the card responds to mouse clicks for setting held-mode.
+     * @param clickable true if the card should toggle held-mode when clicked.
+     */
     public void setClickable(boolean clickable)
     {
         this.clickable = clickable;
@@ -96,6 +104,9 @@ public class CardGraphic extends JLabel
         super.processHierarchyEvent(e);
     }
 
+    /**
+     * Allows the card to receive mouse clicks.
+     */
     @Override
     protected void processMouseEvent(MouseEvent e)
     {
@@ -107,6 +118,9 @@ public class CardGraphic extends JLabel
         super.processMouseEvent(e);
     }
 
+    /**
+     * Renders the highlighting and "HELD" text when in held-mode.
+     */
     @Override
     protected void paintComponent(Graphics g)
     {
@@ -120,7 +134,7 @@ public class CardGraphic extends JLabel
             Composite composite = g2d.getComposite();
             AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, cardAlpha);
             g2d.setComposite(alphaComposite);
-            g2d.setColor(new Color(0,155,0));
+            g2d.setColor(new Color(0, 155, 0));
             g2d.fillRoundRect(0, 0, getWidth(), getHeight(), cardRectRadius, cardRectRadius);
             g2d.setComposite(composite);
 
@@ -138,6 +152,10 @@ public class CardGraphic extends JLabel
         }
     }
 
+    /**
+     * Calculates the dimensions needed for rendering the held-mode highlighting
+     * and initializes the card image.
+     */
     private void InitializeGraphics()
     {
         setText("");
@@ -165,6 +183,10 @@ public class CardGraphic extends JLabel
         }
     }
     
+    /**
+     * Loads the card image resources into a two dimensional array that can be
+     * selected by <code>Suit</code> and <code>Rank</code>.
+     */
     private static void initializeCardFaces()
     {
         if (cardFaces[0][0] != null)
@@ -182,6 +204,10 @@ public class CardGraphic extends JLabel
         cardBack = new ImageIcon(CardGraphic.class.getResource("/net/psilent/cardgraphics/images/cards/back.png"));
     }
 
+
+    /**
+     * Selects the appropriate image based on the current <code>Facing</code>, <code>Suit</code> and <code>Rank</code>.
+     */
     private void selectCardImage()
     {
         if(facing == Facing.BACK)

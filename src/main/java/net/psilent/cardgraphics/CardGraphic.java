@@ -46,6 +46,8 @@ import net.psilent.cardgraphics.CardTypes.Suit;
  */
 public class CardGraphic extends JLabel
 {
+    private static final long serialVersionUID = 1L;
+    
     /**
      * Loads card image graphics, initializes the size of the widget to match the images and
      * enables mouse and hierarchy events.
